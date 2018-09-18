@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,8 +19,10 @@
 		E780893920912A9500EC1A6F /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780893820912A9500EC1A6F /* Logo.swift */; };
 		E780893B209131F400EC1A6F /* Main.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = E780893A209131F400EC1A6F /* Main.stringsdict */; };
 		E780893F20916D6E00EC1A6F /* R0Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E719393320842BE10079589D /* R0Kit.framework */; };
-		E79281202093AF4A00AB9468 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E780893C2091649100EC1A6F /* InfoPlist.strings */; };
+		E7D591C920EC0D5C00EB8224 /* HotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D591C820EC0D5C00EB8224 /* HotKey.swift */; };
 		E7F7C31D20A65E800060CF53 /* CommandWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7C31C20A65E800060CF53 /* CommandWindow.swift */; };
+		E7FFB1D4210E85A7009A56BA /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFB1D3210E85A7009A56BA /* Menu.swift */; };
+		E7FFB1D6210EA071009A56BA /* PrimerSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFB1D5210EA071009A56BA /* PrimerSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,14 +54,14 @@
 		E719393A2084339F0079589D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Menu.strings; sourceTree = "<group>"; };
 		E719393C208435070079589D /* pt-BR */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Menu.strings"; sourceTree = "<group>"; };
 		E719393D2084350F0079589D /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Menu.strings; sourceTree = "<group>"; };
+		E760C4232102292F0099B391 /* XIBSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIBSupport.swift; sourceTree = "<group>"; };
 		E780893620912A5800EC1A6F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E780893820912A9500EC1A6F /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
 		E780893A209131F400EC1A6F /* Main.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Main.stringsdict; sourceTree = "<group>"; };
-		E780893D2091649100EC1A6F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		E792811D2093AF1B00AB9468 /* (null) */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "(null)"; path = "(null).lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		E792811F2093AF4A00AB9468 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E79281212093B49000AB9468 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7D591C820EC0D5C00EB8224 /* HotKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKey.swift; sourceTree = "<group>"; };
 		E7F7C31C20A65E800060CF53 /* CommandWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandWindow.swift; sourceTree = "<group>"; };
+		E7FFB1D3210E85A7009A56BA /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		E7FFB1D5210EA071009A56BA /* PrimerSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimerSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +76,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E7008599210210A500B24468 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				E760C4232102292F0099B391 /* XIBSupport.swift */,
+				E7FFB1D5210EA071009A56BA /* PrimerSupport.swift */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
 		E71938CA20838A9B0079589D = {
 			isa = PBXGroup;
 			children = (
+				E7008599210210A500B24468 /* XIBs */,
 				E71939362084337D0079589D /* Resources */,
 				E71938D520838A9B0079589D /* ClickSliver */,
 				E71938D420838A9B0079589D /* Products */,
@@ -95,16 +107,17 @@
 		E71938D520838A9B0079589D /* ClickSliver */ = {
 			isa = PBXGroup;
 			children = (
+				E71939302083A1240079589D /* main.swift */,
 				E71938D620838A9B0079589D /* AppDelegate.swift */,
+				E7FFB1D3210E85A7009A56BA /* Menu.swift */,
+				E7D591C820EC0D5C00EB8224 /* HotKey.swift */,
+				E7F7C31C20A65E800060CF53 /* CommandWindow.swift */,
 				E780893820912A9500EC1A6F /* Logo.swift */,
 				E780893620912A5800EC1A6F /* Service.swift */,
-				E71939302083A1240079589D /* main.swift */,
 				E71938D820838A9C0079589D /* Assets.xcassets */,
 				E71938DD20838A9C0079589D /* Info.plist */,
-				E780893C2091649100EC1A6F /* InfoPlist.strings */,
 				E71938DE20838A9C0079589D /* ClickSliver.entitlements */,
 				E704D397208815B9008623C9 /* AboutController.swift */,
-				E7F7C31C20A65E800060CF53 /* CommandWindow.swift */,
 			);
 			path = ClickSliver;
 			sourceTree = "<group>";
@@ -174,7 +187,7 @@
 				};
 			};
 			buildConfigurationList = E71938CE20838A9B0079589D /* Build configuration list for PBXProject "ClickSliver" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -199,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E714EC78208E86D2005C48FE /* Changes.html in Resources */,
-				E79281202093AF4A00AB9468 /* InfoPlist.strings in Resources */,
 				E719393520842BE70079589D /* R0Kit.framework in Resources */,
 				E780893B209131F400EC1A6F /* Main.stringsdict in Resources */,
 				E71939392084339F0079589D /* Menu.strings in Resources */,
@@ -218,8 +230,11 @@
 				E780893920912A9500EC1A6F /* Logo.swift in Sources */,
 				E780893720912A5800EC1A6F /* Service.swift in Sources */,
 				E71938D720838A9B0079589D /* AppDelegate.swift in Sources */,
+				E7FFB1D6210EA071009A56BA /* PrimerSupport.swift in Sources */,
 				E704D398208815B9008623C9 /* AboutController.swift in Sources */,
+				E7FFB1D4210E85A7009A56BA /* Menu.swift in Sources */,
 				E7F7C31D20A65E800060CF53 /* CommandWindow.swift in Sources */,
+				E7D591C920EC0D5C00EB8224 /* HotKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,17 +259,6 @@
 				E719393D2084350F0079589D /* fr */,
 			);
 			name = Menu.strings;
-			sourceTree = "<group>";
-		};
-		E780893C2091649100EC1A6F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E780893D2091649100EC1A6F /* pt-BR */,
-				E792811D2093AF1B00AB9468 /* (null) */,
-				E792811F2093AF4A00AB9468 /* en */,
-				E79281212093B49000AB9468 /* fr */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -364,10 +368,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
 				INFOPLIST_FILE = ClickSliver/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.r0ml.ClickSliver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -383,10 +384,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = MHEBPE6SV2;
 				INFOPLIST_FILE = ClickSliver/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.r0ml.ClickSliver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

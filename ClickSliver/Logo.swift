@@ -201,5 +201,311 @@ import R0Kit
  */
 
 
+extension NSWindow {
+  
+  /*
+   public fun setSticky(_ flag : Bool) {
+   CGSConnection cid;
+   CGSWindow wid;
+   wid = [self windowNumber];
+   if (wid < 0)
+   return;
+   cid = _CGSDefaultConnection();
+   CGSWindowTag tags[2];
+   tags[0] = tags[1] = 0;
+   OSStatus retVal = CGSGetWindowTags(cid, wid, tags, 32);
+   if (!retVal) {
+   if (flag)
+   tags[0] |= CGSTagSticky;
+   else
+   tags[0] &= CGSTagSticky;
+   CGSSetWindowTags(cid, wid, tags, 32);
+   }
+   }*/
+  
+  public func flare() {
+    let duration : Double = 2.3
+    
+    // CGSConnection conn = _CGSDefaultConnection();
+    // var transform : CGAffineTransform = CGAffineTransform.identity
+    
+    // CGSGetWindowTransform(conn, [self windowNumber] , &transform);
+    let size = self.frame.size
+    
+    let date = NSDate()
+    
+    var f : Double
+    
+    /*
+     self.contentView?.wantsLayer = true
+     
+     
+     let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+     scaleAnimation.fromValue = 1
+     scaleAnimation.toValue = 9
+     scaleAnimation.duration = 7.0
+     
+     
+     self.setFrame( NSMakeRect(self.frame.origin.x-100, self.frame.origin.y-100, self.frame.width+200, self.frame.height+200), display: true, animate: false )
+     self.contentView?.setFrameSize(self.frame.size)
+     
+     CATransaction.setCompletionBlock {
+     self.close()
+     }
+     self.contentView?.subviews.first?.layer?.add(scaleAnimation, forKey: nil)
+     CATransaction.commit()
+     
+     */
+    
+    // FIXME
+    /* This should work if I
+     a) make the NSImageView have a "scaling" image and
+     b) make the NSImageView have constraints so that it expands with its superview
+     */
+    
+    NSAnimationContext.runAnimationGroup( { context in
+      context.duration = 2
+      self.animator().setFrame( self.screen!.frame, display: true, animate: true )
+      self.contentView?.animator().alphaValue = 0
+    },
+                                          completionHandler:  { self.close()
+    })
+    
+    
+    /*
+     NSAnimationContext.runAnimationGroup({ context in
+     context.duration = 10.0
+     self.contentView?.animator().setFrameSize(NSSize(width: self.frame.width * 2, height: self.frame.height * 2 ))
+     self.contentView?.animator().scaleUnitSquare(to: NSSize(width: 2, height: 2))
+     
+     self.animator().setFrame( NSMakeRect(self.frame.origin.x-100, self.frame.origin.y-100, self.frame.width+200, self.frame.height+200), display: true, animate: true )
+     }, completionHandler: {self.close() } )
+     */
+    
+    /*while (true) {
+     let elapsed = -date.timeIntervalSinceNow
+     if elapsed >= duration { break }
+     f = elapsed/duration
+     let s : CGFloat = CGFloat(0.97+3*pow(f-0.1, 2))
+     // transform = transform.concatenating( CGAffineTransform(scaleX: 1/s, y: 1/s) .scaledBy(x: -size.width/2 + size.width/2*s, y: -size.height/2+size.height/2*s) )
+     
+     let transform = CATransform3DMakeScale(1/s, 1/s, 1)
+     print(transform)
+     self.contentView?.subviews.first?.layer?.transform = transform
+     */
+    //  CGSSetWindowAlpha(conn, [self windowNumber] , pow(1-f, 2) );
+    //  CGSSetWindowTransform(conn, [self windowNumber] , newTransform);
+    // }
+    
+  }
+  
+  
+  
+  public class func windowWithImage(_ image : NSImage) -> NSWindow {
+    let windowRect = NSMakeRect(0, 0, image.size.width, image.size.height)
+    let window = NSWindow.init(contentRect: windowRect, styleMask:NSWindow.StyleMask.borderless, backing:  NSWindow.BackingStoreType.buffered , defer: false)
+    window.ignoresMouseEvents = true
+    
+    window.backgroundColor = NSColor.clear
+    // window.isOpaque = true
+    window.hasShadow = false
+    
+    let z = NSImageView.init(frame: windowRect)
+    z.image = image
+    z.translatesAutoresizingMaskIntoConstraints = false
+    
+    // STOP ME
+    let jj = window.contentView!
+    jj.addSubview(z)
+    jj.widthAnchor.constraint(equalTo: z.widthAnchor).isActive = true
+    jj.heightAnchor.constraint(equalTo: z.heightAnchor).isActive = true
+    z.imageScaling = .scaleProportionallyUpOrDown
+    
+    /*
+     window.contentView?.lockFocus()
+     image.draw(at: NSZeroPoint, from:windowRect, operation: NSCompositingOperation.copy, fraction:1.0)
+     window.contentView?.unlockFocus() */
+    
+    //  window.isAutodisplay = false
+    //  window.isReleasedWhenClosed = true
+    return window
+  }
+  
+}
 
+
+extension NSView {
+  func setAnchorPoint(anchorPoint:CGPoint) {
+    if let layer = self.layer {
+      var newPoint = NSPoint(x: self.bounds.size.width * anchorPoint.x, y: self.bounds.size.height * anchorPoint.y)
+      var oldPoint = NSPoint(x: self.bounds.size.width * layer.anchorPoint.x, y: self.bounds.size.height * layer.anchorPoint.y)
+      
+      newPoint = newPoint.applying(layer.affineTransform())
+      oldPoint = oldPoint.applying(layer.affineTransform())
+      
+      var position = layer.position
+      
+      position.x -= oldPoint.x
+      position.x += newPoint.x
+      
+      position.y -= oldPoint.y
+      position.y += newPoint.y
+      
+      layer.position = position
+      layer.anchorPoint = anchorPoint
+    }
+  }
+}
+
+
+
+
+
+public func showSplash( ) {
+  
+  let splashImage = NSImage(named: "QSLigature")!
+  
+  let splashWindow = NSWindow.windowWithImage(splashImage)
+  splashWindow.isReleasedWhenClosed = false
+  
+  let screenRect = splashWindow.screen!.frame
+  let windowRect =  splashWindow.frame
+  let centeredRect = NSOffsetRect(windowRect, NSMidX(screenRect) - NSMidX(windowRect), NSMidY(screenRect)-NSMidY(windowRect));
+  splashWindow.setFrame(centeredRect, display: false)
+  
+  
+  
+  
+  // [splashWindow setAlphaValue:0];
+  // Do I need this?:
+  // splashWindow.setSticky( true )
+  // splashWindow.animationBehavior = .none
+  
+  splashWindow.orderFront(nil)
+  
+  // FIXME:  Put this back
+  
+  
+  let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+  rotateAnimation.fromValue = 0.0
+  rotateAnimation.toValue = 2 * Double.pi
+  rotateAnimation.duration = 1.0
+  rotateAnimation.repeatCount = 1
+  // rotateAnimation.fillMode = kCAFillModeRemoved
+  
+  let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+  scaleAnimation.fromValue = 0.0
+  scaleAnimation.toValue = 1
+  scaleAnimation.duration = 1.0
+  
+  /*
+   let xAnimation = CABasicAnimation(keyPath: "transform")
+   let size = splashWindow.frame.size
+   // let s = pow(f, 2);
+   // let r = -pow(1-f, 2);
+   let s : CGFloat = 1.0
+   let r : CGFloat = 1.0
+   var t = CGAffineTransform(translationX: size.width/2, y: size.height/2);
+   t = t.rotated(by: 4 * CGFloat(Double.pi) * r);
+   t = t.scaledBy(x: 1/s, y: 1/s)
+   t = t.translatedBy(x: -size.width/2, y:-size.height/2);
+   
+   
+   var f = CGAffineTransform(translationX: size.width/2, y: size.height/2);
+   f = f.scaledBy(x: 0, y: 0)
+   f = f.translatedBy(x: -size.width/2, y: -size.height/2);
+   
+   var fr = CATransform3DIdentity
+   fr = CATransform3DTranslate(fr, size.width/2, size.height/2, 0)
+   fr = CATransform3DScale(fr, 0, 0, 1)
+   // fr = CATransform3DTranslate(fr, size.width/2, size.height/2, 0)
+   
+   
+   var tr = CATransform3DIdentity
+   // tr = CATransform3DTranslate(tr, size.width/2, size.height/2, 0)
+   tr = CATransform3DScale(tr, 1, 1, 1)
+   tr = CATransform3DTranslate(tr, 0, 0, 0)
+   
+   let jf = CATransform3DMakeAffineTransform(f)
+   let jt = CATransform3DMakeAffineTransform(t)
+   
+   xAnimation.fromValue =  fr
+   xAnimation.toValue = tr
+   xAnimation.duration = 1.0
+   
+   var yAnimation = CABasicAnimation(keyPath: "transform")
+   // var tz = CATransform3DIdentity
+   var tz = CATransform3DMakeRotation(-1.99 * CGFloat.pi, 0, 0, 1)
+   //yAnimation.fromValue = CATransform3DIdentity
+   yAnimation.toValue = tz
+   yAnimation.duration = 1.0
+   */
+  
+  splashWindow.isOpaque = false
+  splashWindow.contentView?.wantsLayer = true
+  
+  CATransaction.setCompletionBlock {
+    hideSplash(splashWindow)
+  }
+  
+  if let cv = splashWindow.contentView?.subviews.first {
+    cv.wantsLayer = true
+    if let ll = cv.layer {
+      
+      // ll.add(xAnimation, forKey: nil)
+      // ll.add(yAnimation, forKey: nil)
+      
+      cv.setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:0.5))
+      ll.add(rotateAnimation, forKey: nil)
+      ll.add(scaleAnimation, forKey: nil)
+    }
+  }
+  /*
+   NSAnimationContext.runAnimationGroup( { (context) -> Void in
+   context.duration = 1.0
+   // splashWindow.contentView!.animator().rotate(byDegrees: 180)
+   splashWindow.contentView!.animator().frameCenterRotation = CGFloat(1.3 * Double.pi)
+   }, completionHandler: nil)
+   */
+  
+  /*
+   
+   NSAnimationContext.runAnimationGroup({ (context) -> Void in
+   context.duration = 1.0
+   splashWindow.animator().
+   }, completionHandler: nil)
+   
+   
+   if let animation = QSWindowAnimation.showHelper(for: splashWindow) {
+   animation.setTransformFt(QSExtraExtraEffect)
+   animation.duration = 1.0
+   animation.animationBlockingMode = NSAnimation.BlockingMode.blocking
+   animation.start()
+   }
+   */
+  
+}
+
+let kUseEffects = "Use Effects"
+
+public func hideSplash(_ splashWindow: NSWindow) {
+  splashWindow.level = NSWindow.Level.floating
+  
+  splashWindow.flare()
+}
+
+public func setupSplash() {
+  if UserDefaults.standard.bool(forKey: kUseEffects) {
+    showSplash()
+  }
+  // double delayInSeconds = 0.1;
+  // FIXME: pop down the splash
+  /*        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+   dispatch_after(popTime, dispatch_get_current_queue(), ^(void) {
+   // hide the splash in a background thread
+   [self hideSplash:nil];
+   });
+   */
+  // }
+}
 

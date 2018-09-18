@@ -37,8 +37,6 @@ extension NSAttributedString {
   }
 }
 
-
-
 extension NSScreen {
   public var usesOpenGLAcceleration : Bool { get {
     let screenDictionary = self.deviceDescription
@@ -54,17 +52,17 @@ extension NSScreen {
 
 public class AboutViewController : NSViewController {
   var imageView : NSImageView!
-
+  
   open override func loadView() {
     view = NSView()
     view.backgroundColor = NSColor.controlColor
     
     // let appBundle = Bundle.main
-   
+    
     /*var name = appBundle.object( forInfoDictionaryKey: "CFBundleShortVersionString")
-    if (name == nil) {
-      name = "Quicksilver"
-    }*/
+     if (name == nil) {
+     name = "Quicksilver"
+     }*/
     
     // NTViewLocalizer.localizeWindow(self.window!, table: "About", bundle: Bundle.main)
     
@@ -72,24 +70,24 @@ public class AboutViewController : NSViewController {
     // self.window?.delegate = self // needed, so windowWillClose: method is called
     //  (self.window?.initialFirstResponder as! NSTextField).stringValue = String(format: "%@ (%@)", name as! CVarArg, appBundle.object(forInfoDictionaryKey: "CFBundleVersion") as! CVarArg)
     
-   /*  if (nil == NSFont(name: "HiraKakuPro-W3", size:10.0)) {
-      NSLog("HiraKakuPro-W3 not found. Removing chinese characters")
-      let contentView = self.view.window?.contentView
-      while (true) {
-        if let subview = contentView?.viewWithTag(1) {
-          subview.removeFromSuperview()
-        } else {
-          break
-        }
-      }
-    } */
-
+    /*  if (nil == NSFont(name: "HiraKakuPro-W3", size:10.0)) {
+     NSLog("HiraKakuPro-W3 not found. Removing chinese characters")
+     let contentView = self.view.window?.contentView
+     while (true) {
+     if let subview = contentView?.viewWithTag(1) {
+     subview.removeFromSuperview()
+     } else {
+     break
+     }
+     }
+     } */
+    
     let taoteching = "道德經"
-
-// chapter 63
-/*  let cv1 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 24, height: 0)))
-    cv1.text = "為無為 事無事 味無味 大小多少"
-    */
+    
+    // chapter 63
+    /*  let cv1 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 24, height: 0)))
+     cv1.text = "為無為 事無事 味無味 大小多少"
+     */
     
     let cv2 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 24, height: 0)))
     cv2.text = """
@@ -100,10 +98,10 @@ public class AboutViewController : NSViewController {
     夫輕諾必寡信 多易必多難 是以聖人猶難之
     故終無難
     """
-/*
-    let cv3 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 24, height: 0)))
-    cv3.text = "天下難事 必作於易 天下大事 必作於細"
-*/
+    /*
+     let cv3 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 24, height: 0)))
+     cv3.text = "天下難事 必作於易 天下大事 必作於細"
+     */
     let cv4 = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 150, height: 0)))
     cv4.text = """
     Act without doing;
@@ -172,17 +170,17 @@ public class AboutViewController : NSViewController {
     
     
     // chapter 41
-
+    
     let cv5 = TextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 85, height: 0)))
     cv5.text = """
     上士聞道 勤而行之 中士聞道 若存若亡
     下士聞道 大笑之 不笑不足以為道
     故建言有之 明道若昧 進道若退 夷道若類 上德若谷 大白若辱 廣德若不足 建德若偷 質直若渝 大方無隅 大器晚成 大音希聲 大象無形
     夫惟道 善貸且成
-"""
-  
+    """
+    
     let fntx = NSFont(name: "HiraKakuPro-W3" /*"HiraMinPro-W3"*/, size: 14)
-
+    
     let textheight : CGFloat = 450
     let qrs = cv5.text.height(withConstrainedWidth: textheight, font: fntx!)
     print(qrs)
@@ -209,7 +207,7 @@ public class AboutViewController : NSViewController {
     Great icons are shapeless.
     The Dao is a master of provisioning and empowerment.
     """
-     /*
+    /*
      The Dao produced One; One produced Two; Two produced Three; Three produced All things. All things leave behind them the Obscurity (out of which they have come), and go forward to embrace the Brightness (into which they have emerged), while they are harmonised by the Breath of Vacancy.
      What men dislike is to be orphans, to have little virtue, to be as carriages without naves; and yet these are the designations which kings and princes use for themselves. So it is that some things are increased by being diminished, and others are diminished by being increased.
      What other men (thus) teach, I also teach. The violent and strong do not die their natural death. I will make this the basis of my teaching.
@@ -231,8 +229,8 @@ public class AboutViewController : NSViewController {
      The truthful look like good quality turned bad,
      An infinite space will have no corners.
      A man becomes a great instrument accomplishes through long training.
-    """
-*/
+     """
+     */
     
     cv5.font = fntx
     cv5.setLayoutOrientation(.vertical)
@@ -255,7 +253,7 @@ public class AboutViewController : NSViewController {
     let s1 = View().stacker(vertical: false)
     let s2 = s1.spread(0.4).view(jj).spread(0.6).view(cv6).end()
     s2.addInto(view)
-  
+    
     s2.backgroundColor = NSColor.clear
     
     // s2.backgroundColor = NSColor.clear
@@ -264,23 +262,23 @@ public class AboutViewController : NSViewController {
     
     let img = NSImageView.init(image: NSImage.init(named: "ClickSliver")!)
     
-      
+    
     img.scaleMe()
     img.heightAnchor.constraint(equalToConstant: 225).isActive = true
     img.widthAnchor.constraint(equalToConstant: 225).isActive = true
     
-
-   // let btf = NSTextField(labelWithString: "水银")
+    
+    // let btf = NSTextField(labelWithString: "水银")
     let fnt = NSFont(name: "HiraMinPro-W3", size: 288 )
-   // btf.font = fnt
-   // btf.text
-
+    // btf.font = fnt
+    // btf.text
+    
     let btv = NSTextView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 350, height: 0)))
-
+    
     btv.setLayoutOrientation(.vertical)
     btv.font = fnt
     btv.text = "水银"
-
+    
     
     let z = NSMutableAttributedString.init(string: "水银", attributes: [
       NSAttributedString.Key.backgroundColor : NSColor.orange,
@@ -293,11 +291,11 @@ public class AboutViewController : NSViewController {
     // make it render all the text, but get clipped by the superview (cutting off some of the letter ...)
     
     btv.addInto(view, with: [.topPad(-5), .centerX ])
-
     
-   //  btv.backgroundColor = NSColor.controlBackgroundColor
-   //  btv.wantsLayer = true
-   //  btv.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+    
+    //  btv.backgroundColor = NSColor.controlBackgroundColor
+    //  btv.wantsLayer = true
+    //  btv.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
     
     // btv.drawsBackground = false
     btv.setTransparentBackground()
@@ -306,7 +304,7 @@ public class AboutViewController : NSViewController {
     // (btv as NSView).backgroundColor = NSColor.green
     // print(NSColor.controlBackgroundColor.redComponent, NSColor.controlBackgroundColor)
     // btv.sizeToFit()
-     btv.textColor = NSColor.white
+    btv.textColor = NSColor.white
     btv.isEditable = false
     btv.alphaValue = 0.5
     
@@ -315,24 +313,24 @@ public class AboutViewController : NSViewController {
     
     // btv.isHorizontallyResizable = true
     // btv.isVerticallyResizable = false
-  
-//    btv.setFrameSize(CGSize(width: 300, height: 0))
-//    btv.setBoundsSize(CGSize(width: 300, height: 0))
+    
+    //    btv.setFrameSize(CGSize(width: 300, height: 0))
+    //    btv.setBoundsSize(CGSize(width: 300, height: 0))
     
     let tc = btv.textContainer!
     print("orient:",tc.layoutOrientation.rawValue)
     
-   //  tc.size = CGSize(width: 100000000, height: 0)
+    //  tc.size = CGSize(width: 100000000, height: 0)
     
-//    tc.widthTracksTextView = false
-//    tc.heightTracksTextView = true
+    //    tc.widthTracksTextView = false
+    //    tc.heightTracksTextView = true
     
     let rng = lm.glyphRange(for: tc) // this causes the resizing to happen?
     
     // lm.ensureLayout(for: tc)
     
     // print("container:", tc.containerSize)
-
+    
     // let r = lm.usedRect(for: tc) // this doesn't work
     let r2 = lm.boundingRect(forGlyphRange: rng, in: tc)
     
@@ -343,36 +341,36 @@ public class AboutViewController : NSViewController {
     btv.heightAnchor.constraint(equalToConstant: r2.height).isActive = true
     
     /*
-    if ( (NSScreen.main?.usesOpenGLAcceleration)! ) {
-      let r0 = imageView.frame
-      let r = self.view.window?.convertToScreen(r0)
-      // NSRect r = NSMakeRect(100, 200, 300, 400);
-      
-      let win = NSWindow.init(contentRect:r!,
-                              styleMask: NSWindow.StyleMask.borderless,
-                              backing:NSWindow.BackingStoreType.buffered,
-                              defer: false
-      )
-      win.ignoresMouseEvents = true
-      win.backgroundColor = NSColor.clear
-      win.isOpaque = false
-      win.hasShadow = false
-      
-      win.isReleasedWhenClosed = true
-      
-      let content = QCView()
-      content.loadComposition(fromFile: appBundle.path(forResource: "QSSplash", ofType: "qtz"))
-      win.contentView = content
-      content.setEraseColor(NSColor.clear)
-      
-      // content.setClearsBackground(true)
-      
-      content.setMaxRenderingFrameRate(10)
-      win.display()
-      view.window?.addChildWindow(win, ordered:NSWindow.OrderingMode.above)
-      imageView.removeFromSuperview()
-    }
- */
+     if ( (NSScreen.main?.usesOpenGLAcceleration)! ) {
+     let r0 = imageView.frame
+     let r = self.view.window?.convertToScreen(r0)
+     // NSRect r = NSMakeRect(100, 200, 300, 400);
+     
+     let win = NSWindow.init(contentRect:r!,
+     styleMask: NSWindow.StyleMask.borderless,
+     backing:NSWindow.BackingStoreType.buffered,
+     defer: false
+     )
+     win.ignoresMouseEvents = true
+     win.backgroundColor = NSColor.clear
+     win.isOpaque = false
+     win.hasShadow = false
+     
+     win.isReleasedWhenClosed = true
+     
+     let content = QCView()
+     content.loadComposition(fromFile: appBundle.path(forResource: "QSSplash", ofType: "qtz"))
+     win.contentView = content
+     content.setEraseColor(NSColor.clear)
+     
+     // content.setClearsBackground(true)
+     
+     content.setMaxRenderingFrameRate(10)
+     win.display()
+     view.window?.addChildWindow(win, ordered:NSWindow.OrderingMode.above)
+     imageView.removeFromSuperview()
+     }
+     */
     img.addInto(view, with: [.top, .trailing])
     img.alphaValue = 0.5
     img.wantsLayer = true
@@ -385,7 +383,7 @@ public class AboutViewController : NSViewController {
   open override func viewDidLoad() {
     print("glem")
   }
-
+  
   open override func viewWillLayout() {
     // super.viewWillLayout()
     // let z = scrollView.bounds
@@ -394,12 +392,12 @@ public class AboutViewController : NSViewController {
     // self.collectionView.invalidateLayout()
   }
   
-   // FIXME: should this be true or false?
+  // FIXME: should this be true or false?
   open override func viewWillAppear() {
     // view.wantsLayer = true
     // view.layer?.backgroundColor = NSColor.red.cgColor
     
-
+    
     self.viewWillAppear(false) // I don't know if this should be true or false
   }
   
@@ -407,7 +405,7 @@ public class AboutViewController : NSViewController {
     // view.wantsLayer = true
     // view.layer?.backgroundColor = NSColor.red.cgColor
     
-
+    
   }
   
 }
@@ -420,7 +418,7 @@ public class AboutWindowController : NSWindowController, NSWindowDelegate {
     wnd.setFrameOrigin(CGPoint(x: 100, y: 100))
     wnd.styleMask =  [.closable, .titled]
     wnd.backingType = .buffered
- 
+    
     wnd.isReleasedWhenClosed = false
     wnd.title = "About"
     wnd.isOpaque = false
@@ -442,35 +440,35 @@ public class AboutWindowController : NSWindowController, NSWindowDelegate {
   }
   
   /*required public init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }*/
+   fatalError("init(coder:) has not been implemented")
+   }*/
   
- /* override public func showWindow(_ sender : Any?) {
-    // start rendering QS animation each time the window is opened
-    if let z = self.window?.childWindows, z.count > 0, let y = z[0].contentView as? QCView {
-      y.startRendering()
-    }
-    super.showWindow(sender)
-  }*/
-  
-  /*
-  public func windowWillClose(_ notification : Notification) {
-    // stop rendering QS animation each time the window is closed
-    let a = notification.object as? NSWindow
-    let b = a?.childWindows?[0]
-    if let c = b?.contentView as? QCView {
-      c.stopRendering()
-    }
-  }*/
+  /* override public func showWindow(_ sender : Any?) {
+   // start rendering QS animation each time the window is opened
+   if let z = self.window?.childWindows, z.count > 0, let y = z[0].contentView as? QCView {
+   y.startRendering()
+   }
+   super.showWindow(sender)
+   }*/
   
   /*
-  public func webView(_ sender : WebView, decidePolicyForNavigationAction actionInformation : NSDictionary, request: NSURLRequest, frame: WebFrame, decisionListener listener : AnyObject) {
-    if (request.url?.scheme == "file") {
-      listener.use()
-    } else {
-      NSWorkspace.shared.open(request.url!)
-      listener.ignore()
-    }
-  }*/
+   public func windowWillClose(_ notification : Notification) {
+   // stop rendering QS animation each time the window is closed
+   let a = notification.object as? NSWindow
+   let b = a?.childWindows?[0]
+   if let c = b?.contentView as? QCView {
+   c.stopRendering()
+   }
+   }*/
+  
+  /*
+   public func webView(_ sender : WebView, decidePolicyForNavigationAction actionInformation : NSDictionary, request: NSURLRequest, frame: WebFrame, decisionListener listener : AnyObject) {
+   if (request.url?.scheme == "file") {
+   listener.use()
+   } else {
+   NSWorkspace.shared.open(request.url!)
+   listener.ignore()
+   }
+   }*/
   
 }

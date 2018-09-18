@@ -54,6 +54,26 @@ public var theServicer = TheService.init()
     return true
   }
   
+  class func servicesMenu() -> R0MenuItem {
+    
+    // NSRegisterServicesProvider(NSApp, NSServiceProviderName(rawValue: "ClickSliver"))
+    NSApp.servicesProvider = theServicer
+    NSApp.registerServicesMenuSendTypes( [.string, .rtf, .fileURL, .filePromise, .html, .pdf, .png, .rtfd, .sound, .tiff, .URL, .vCard], returnTypes:[.string, .rtf, .fileURL, .filePromise, .html, .pdf, .png, .rtfd, .sound, .tiff, .URL, .vCard])
+    
+    // NSRegisterServicesProvider(theServicer, NSServiceProviderName(rawValue: "ClickSliver"))
+    NSUpdateDynamicServices()
+    
+    
+    let servicesMenu = NSMenu()
+    
+    // Create menu item for it
+    let servicesItem = R0MenuItem(title: "Services", keyEquivalent: "") {_ in }
+    
+    servicesItem.submenu = servicesMenu
+    NSApp.servicesMenu = servicesMenu
+    return servicesItem
+  }
+  
   
 }
 
@@ -89,38 +109,5 @@ extension NSApplication /* : NSServicesMenuRequestor */ {
    print("write selection: ",pboard, types)
    return true
    }*/
-  
-  public func registerKey(_ keyCode : Int, _ modifierKeys : Int) -> OpaquePointer {
-  var gMyHotKeyID = EventHotKeyID()
-  gMyHotKeyID.signature = OSType(0x73776174)
-  gMyHotKeyID.id = UInt32(keyCode)
-  
-  var eventType = EventTypeSpec()
-  eventType.eventClass = OSType(kEventClassKeyboard)
-  eventType.eventKind = OSType(kEventHotKeyPressed)
-  
-    let targ = GetApplicationEventTarget()
-    // let targ = GetEventDispatcherTarget()
-    // GetApplicationEventTarget()
-  // Install handler.
-  let x = InstallEventHandler(targ, {(nextHanlder, theEvent, userData) -> OSStatus in
-  var hkCom = EventHotKeyID()
-    print("hah", hkCom)
-    GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout.size(ofValue: hkCom), nil, &hkCom)
-  
-  /// Check that hkCom in indeed your hotkey ID and handle it.
-    CommandController.singleton.showWindow(nil)
-    return OSStatus(0)
-  }, 1, [eventType], nil, nil)
-  
-    print("Install",x)
-  // Register hotkey.
-    var hotKeyRef : EventHotKeyRef?
-    
-    // the cmdkey stuff is not the same as in KeyCodes
-    let status = RegisterEventHotKey(UInt32(keyCode), UInt32(modifierKeys), gMyHotKeyID, targ, 0, &hotKeyRef)
-    print("status",status, hotKeyRef.unsafelyUnwrapped, modifierKeys)
-    return hotKeyRef.unsafelyUnwrapped
-  }
   
 }
